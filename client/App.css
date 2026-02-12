@@ -222,7 +222,7 @@ body.dark-theme .result-city {
 
 body.dark-theme .search-result-item:hover {
   /* color: #000; */
-  .result-city{
+  .result-city {
     color: #1a202c;
   }
 }
@@ -675,9 +675,23 @@ body.dark-theme .sidebar-nav button:hover {
 }
 
 .user-greeting {
-  font-weight: 600;
-  color: #2d3748;
-  font-size: 16px;
+  display: inline-block;
+  white-space: nowrap;
+}
+
+.fade-in {
+  animation: greetingFadeIn 2.5s ease-out both;
+}
+
+@keyframes greetingFadeIn {
+  from {
+    opacity: 0;
+    transform: translateX(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
 }
 
 body.dark-theme .user-greeting {
@@ -1203,10 +1217,23 @@ body.dark-theme .favorite-error {
 }
 
 .hourly-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 8px;
+  display: flex;
+  gap: 15px;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scroll-behavior: smooth;
+
+  scrollbar-width: none;
+  -ms-overflow-style: none;
   margin-bottom: 32px;
+}
+.hourly-grid::-webkit-scrollbar {
+  display: none;
+}
+
+.hourly-item {
+  flex: 0 0 auto;
+  min-width: 130px;
 }
 
 .hourly-item {
@@ -1672,52 +1699,6 @@ body.dark-theme .form-group input:focus {
   border-color: #4299e1;
 }
 
-/* Toggle Switch */
-.toggle-switch {
-  position: relative;
-  display: inline-block;
-  width: 52px;
-  height: 28px;
-}
-
-.toggle-switch input {
-  opacity: 0;
-  width: 0;
-  height: 0;
-}
-
-.toggle-slider {
-  position: absolute;
-  cursor: pointer;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: #cbd5e0;
-  transition: 0.4s;
-  border-radius: 28px;
-}
-
-.toggle-slider:before {
-  position: absolute;
-  content: "";
-  height: 20px;
-  width: 20px;
-  left: 4px;
-  bottom: 4px;
-  background-color: white;
-  transition: 0.4s;
-  border-radius: 50%;
-}
-
-input:checked + .toggle-slider {
-  background-color: #4299e1;
-}
-
-input:checked + .toggle-slider:before {
-  transform: translateX(24px);
-}
-
 /* Responsive Design */
 @media (max-width: 1200px) {
   .dashboard-grid {
@@ -1806,25 +1787,23 @@ input:checked + .toggle-slider:before {
   width: 100%;
 }
 
-/* Light Mode Blur */
 .dashboard-wrapper.is-blurred {
   filter: blur(15px) brightness(0.9);
   pointer-events: none;
   transform: scale(0.99);
 }
 
-/* Dark Mode Blur Adjustment */
 body.dark-theme .dashboard-wrapper.is-blurred {
   filter: blur(15px) brightness(0.6);
 }
-/* MODAL OVERLAY (Yung madilim/transparent na background) */
+
 .modal-overlay {
   position: fixed;
   top: 0;
   left: 0;
   width: 100vw;
   height: 100vh;
-  background: rgba(0, 0, 0, 0.2); /* Light mode tint */
+  background: rgba(0, 0, 0, 0.2);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -1833,31 +1812,26 @@ body.dark-theme .dashboard-wrapper.is-blurred {
 }
 
 body.dark-theme .modal-overlay {
-  background: rgba(0, 0, 0, 0.5); /* Dark mode tint */
+  background: rgba(0, 0, 0, 0.5);
 }
 
-/* THE POP-UP CARD */
 .pop-modal-card {
   width: 90%;
   max-width: 700px;
   border-radius: 28px;
   padding: 30px;
   animation: popScale 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-
-  /* Light Mode Card */
   background: #ffffff;
   color: #2d3748;
   box-shadow: 0 40px 100px rgba(0, 0, 0, 0.1);
 }
 
 body.dark-theme .pop-modal-card {
-  /* Dark Mode Card (Matching your existing theme) */
   background: #2d3748;
   color: #f7fafc;
   border: 1px solid #4a5568;
   box-shadow: 0 40px 100px rgba(0, 0, 0, 0.6);
 }
-/* Modal Header & Close */
 .pop-modal-header {
   display: flex;
   justify-content: space-between;
@@ -1871,55 +1845,6 @@ body.dark-theme .pop-modal-card {
   color: #718096;
   font-size: 28px;
   cursor: pointer;
-}
-
-/* Hourly Items */
-.pop-hourly-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 12px;
-  margin-bottom: 30px;
-}
-
-.pop-hour-item {
-  background: #f7fafc;
-  padding: 15px 10px;
-  border-radius: 18px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  font-size: 0.9rem;
-}
-
-body.dark-theme .pop-hour-item {
-  background: #1a202c;
-}
-
-.pop-hour-item.active {
-  background: #4299e1; /* Your primary blue */
-  color: white !important;
-}
-
-/* Daily Rows */
-.pop-daily-row {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 14px 0;
-  border-bottom: 1px solid #e2e8f0;
-}
-
-body.dark-theme .pop-daily-row {
-  border-bottom: 1px solid #4a5568;
-}
-
-.p-sub-date {
-  font-size: 0.8rem;
-  color: #718096;
-}
-
-body.dark-theme .p-sub-date {
-  color: #cbd5e0;
 }
 
 /* ANIMATIONS */

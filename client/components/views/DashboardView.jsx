@@ -25,7 +25,8 @@ export default function DashboardView({
               key={`${loc.lat},${loc.lon}`}
               onClick={() => setSelectedLocation(loc)}
               className={
-                selectedLocation.lat === loc.lat && selectedLocation.lon === loc.lon
+                selectedLocation.lat === loc.lat &&
+                selectedLocation.lon === loc.lon
                   ? "active"
                   : ""
               }
@@ -65,16 +66,17 @@ export default function DashboardView({
                 })}
               </div>
             </div>
-
-            <button
-              onClick={() => toggleFavorite(selectedLocation)}
-              className="favorite-btn"
-            >
-              <Heart
-                size={24}
-                fill={isFavorite(selectedLocation) ? "currentColor" : "none"}
-              />
-            </button>
+            {isLoggedIn && (
+              <button
+                onClick={() => toggleFavorite(selectedLocation)}
+                className="favorite-btn"
+              >
+                <Heart
+                  size={24}
+                  fill={isFavorite(selectedLocation) ? "currentColor" : "none"}
+                />
+              </button>
+            )}
           </div>
 
           <div className="weather-main-content">

@@ -8,7 +8,7 @@ async function safeJson(res) {
   }
 }
 
-export default function useAuth(onLoginLoadFavorites) {
+export default function useAuth(onLoginLoadFavorites, setCurrentView) {
   const API_URL =
     import.meta.env.VITE_API_URL || "http://localhost:3001/api/auth";
 
@@ -98,6 +98,7 @@ export default function useAuth(onLoginLoadFavorites) {
     setIsLoggedIn(false);
     setCurrentUser(null);
     localStorage.removeItem("currentUser");
+    setCurrentView("dashboard");
   };
 
   return { isLoggedIn, currentUser, login, register, logout };

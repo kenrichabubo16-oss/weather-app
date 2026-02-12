@@ -22,6 +22,7 @@ export default function App() {
   const [sidebarOpen, setSidebarOpen] = useState(true);
   const [currentView, setCurrentView] = useState("dashboard");
   const [showSettings, setShowSettings] = useState(false);
+  const [showCalendar, setShowCalendar] = useState(false);
 
   // Default location when user is not logged in or no favorites
   const defaultLocation = {
@@ -44,7 +45,7 @@ export default function App() {
   } = useFavorites({ OWM_KEY, unitParam });
 
   const { isLoggedIn, currentUser, login, register, logout } =
-    useAuth(loadFavorites);
+    useAuth(loadFavorites, setCurrentView);
 
   const { weatherData, weatherLoading, weatherError } = useWeather({
     isLoggedIn: true,
@@ -63,7 +64,7 @@ export default function App() {
       lat: place.lat,
       lon: place.lon,
     });
-    setCurrentView("dashboard");
+    setsetCurrentView("dashboard");
     search.resetSearch();
   };
 
@@ -88,6 +89,13 @@ export default function App() {
           onClose={() => setShowSettings(false)}
         />
       )}
+      {showCalendar && (
+        <CalendarView
+          weatherData={weatherData}
+          weatherError={weatherError}
+          onClose={() => setShowCalendar(false)}
+        />
+      )}
 
       <Sidebar
         sidebarOpen={sidebarOpen}
@@ -95,6 +103,7 @@ export default function App() {
         currentView={currentView}
         setCurrentView={setCurrentView}
         onOpenSettings={() => setShowSettings(true)}
+        onOpenCalendar={() => setShowCalendar(true)}
         onLogout={handleLogout}
         isLoggedIn={isLoggedIn}
       />
@@ -142,10 +151,6 @@ export default function App() {
             unitParam={unitParam}
             settings={settings}
           />
-        )}
-
-        {currentView === "calendar" && (
-          <CalendarView weatherData={weatherData} weatherError={weatherError} onClose={() => setCurrentView("dashboard")} />
         )}
       </div>
     </div>

@@ -43,24 +43,6 @@ export default function SettingsModal({ settings, saveSettings, onClose }) {
               <option value="dark">Dark</option>
             </select>
           </div>
-
-          <div className="setting-item">
-            <div className="setting-info">
-              <Bell size={20} />
-              <div>
-                <h3>Notifications</h3>
-                <p>Receive weather alerts</p>
-              </div>
-            </div>
-            <label className="toggle-switch">
-              <input
-                type="checkbox"
-                checked={settings.notifications}
-                onChange={(e) => saveSettings({ ...settings, notifications: e.target.checked })}
-              />
-              <span className="toggle-slider"></span>
-            </label>
-          </div>
         </div>
       </div>
     </div>

@@ -16,6 +16,7 @@ export default function Sidebar({
   currentView,
   setCurrentView,
   onOpenSettings,
+  onOpenCalendar,
   onLogout,
   isLoggedIn,
 }) {
@@ -28,7 +29,7 @@ export default function Sidebar({
               <div className="brand-icon">
                 <Cloud size={24} />
               </div>
-              <span className="Title-logo">MAYWEATHER</span>
+              <span className="Title-logo">SkyCast</span>
             </div>
             <button onClick={() => setSidebarOpen(false)}>
               <X size={20} />
@@ -42,17 +43,25 @@ export default function Sidebar({
       </div>
 
       <nav className="sidebar-nav">
-        <button className={currentView === "dashboard" ? "active" : ""} onClick={() => setCurrentView("dashboard")}>
+        <button
+          className={currentView === "dashboard" ? "active" : ""}
+          onClick={() => setCurrentView("dashboard")}
+        >
           <MapIcon size={20} />
           {sidebarOpen && <span>Dashboard</span>}
         </button>
 
-        <button className={currentView === "favorites" ? "active" : ""} onClick={() => setCurrentView("favorites")}>
-          <Heart size={20} />
-          {sidebarOpen && <span>Saved Location</span>}
-        </button>
+        {isLoggedIn && (
+          <button
+            className={currentView === "favorites" ? "active" : ""}
+            onClick={() => setCurrentView("favorites")}
+          >
+            <Heart size={20} />
+            {sidebarOpen && <span>Saved Location</span>}
+          </button>
+        )}
 
-        <button className={currentView === "calendar" ? "active" : ""} onClick={() => setCurrentView("calendar")}>
+        <button onClick={onOpenCalendar}>
           <Calendar size={20} />
           {sidebarOpen && <span>Calendar</span>}
         </button>
